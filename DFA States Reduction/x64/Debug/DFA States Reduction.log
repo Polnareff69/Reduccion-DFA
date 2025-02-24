@@ -1,2 +1,3 @@
-﻿  Reduccion.cpp
-  DFA States Reduction.vcxproj -> C:\Users\Juan\source\repos\DFA States Reduction\x64\Debug\DFA States Reduction.exe
+﻿  DFA States Reduction.cpp
+D:\JJ\Reduccion-DFA\DFA States Reduction\DFA States Reduction.cpp(17,9): warning C4101: 'estadosFinales': variable local sin referencia
+  DFA States Reduction.vcxproj -> D:\JJ\Reduccion-DFA\x64\Debug\DFA States Reduction.exe
