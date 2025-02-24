@@ -51,6 +51,14 @@ map<string, bool> Reduccion::MarcarParesNoMarcados(map<string, bool>& parejas, c
                                 count++;
                             }
                         }
+                        else {
+                            string clave = to_string(estadoDestino2) + "," + to_string(estadoDestino);
+                            auto pareja = parejas.find(clave);
+                            if (pareja != parejas.end() and pareja->second == true) {
+                                par.second = true;
+                                count++;
+                            }
+                        }
                     }
                 }              
             }
