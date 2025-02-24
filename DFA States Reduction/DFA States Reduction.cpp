@@ -76,26 +76,35 @@ int main() {
            
         }
 
+        DFA M(estadosDFA, alfabeto, 0, transiciones, estadosFinalesDFA);
+        map<string, bool> parejas = M.generarParejasEstados();
+
+        cout << "Antes del cambio:\n";
+        for (const auto& par : parejas) {
+            cout << par.first << " -> " << (par.second ? "true" : "false") << endl;
+        }
+
+        map<string, bool> parejasMarcadas = Reduccion::MarcarPares(parejas, M);
+
+
+        cout << "\nDespués del cambio:\n";
+        for (const auto& par : parejasMarcadas) {
+            cout << par.first << " -> " << (par.second ? "true" : "false") << endl;
+        }
+
+        map<string, bool> parejasFinales = Reduccion::MarcarParesNoMarcados(parejasMarcadas, M);
+
+        cout << "\nDespués del cambio Final:\n";
+        for (const auto& par : parejasFinales) {
+            cout << par.first << " -> " << (par.second ? "true" : "false") << endl;
+        }
+
+        estadosDFA.clear();
+        alfabeto.clear();
+        estadosFinalesDFA.clear();
+        transiciones.clear();
+
     }
-    DFA M(estadosDFA, alfabeto, 0, transiciones, estadosFinalesDFA);
-
-    map<string, bool> parejas = M.generarParejasEstados();
-
-    cout << "Antes del cambio:\n";
-    for (const auto& par : parejas) {
-        cout << par.first << " -> " << (par.second ? "true" : "false") << endl;
-    }
-
-    map<string, bool> parejasMarcadas = Reduccion::MarcarPares(parejas, M);
-
-
-    cout << "\nDespués del cambio:\n";
-    for (const auto& par : parejasMarcadas) {
-        cout << par.first << " -> " << (par.second ? "true" : "false") << endl;
-    }
-
-    Reduccion::MarcarParesNoMarcados(parejas, M);
-
 
 
     return 0;

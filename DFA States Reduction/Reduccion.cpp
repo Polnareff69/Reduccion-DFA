@@ -23,37 +23,39 @@ map<string, bool> Reduccion::MarcarParesNoMarcados(map<string, bool>& parejas, c
         const set<char>& alfabeto = dfa.getAlfabeto();
         const map<pair<int, char>, int> transiciones = dfa.getTransiciones();
         char a = *alfabeto.begin();
-        int count = 0;
-        
 
-        for (auto& par :parejas){
-            if(par.second = false){ 
+        while (true) {
+            int count = 0;
 
-            int p = stoi(par.first.substr(0, 1));
-            int q = stoi(par.first.substr(2, 3));
 
-            auto pair1 = make_pair(p, a);
-            auto it1 = transiciones.find(pair1);
-            auto pair2 = make_pair(q, a);
-            auto it2 = transiciones.find(pair2);
-            
+            for (auto& par : parejas) {
+                if (par.second == false) {
+                    //cout << "Entrada no marcada" << endl;
+                    int p = stoi(par.first.substr(0, 1));
+                    int q = stoi(par.first.substr(2, 3));
 
-            if (it1 != transiciones.end() and it2 != transiciones.end()) {
-                int estadoDestino = it1->second;
-                int estadoDestino2 = it2->second;
-                string clave = to_string(estadoDestino) + "," + to_string(estadoDestino2);
-                auto pareja = parejas.find(clave);
-                if (pareja != parejas.end()) {
-                    if (pareja->second = true) {
-                        par.second = true;
-                        count++;
+                    auto pair1 = make_pair(p, a);
+                    auto it1 = transiciones.find(pair1);
+                    auto pair2 = make_pair(q, a);
+                    auto it2 = transiciones.find(pair2);
+
+
+                    if (it1 != transiciones.end() and it2 != transiciones.end()) {
+                        int estadoDestino = it1->second;
+                        int estadoDestino2 = it2->second;
+                        string clave = to_string(estadoDestino) + "," + to_string(estadoDestino2);
+                        auto pareja = parejas.find(clave);
+                        if (pareja != parejas.end()) {
+                            if (pareja->second == true) {
+                                par.second = true;
+                                count++;
+                            }
                         }
                     }
-                }
+                }              
             }
+            if (count == 0) break;
 
-
-            
         }
         
     return parejas;
